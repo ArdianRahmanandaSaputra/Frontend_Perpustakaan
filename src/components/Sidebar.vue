@@ -12,7 +12,7 @@
 
     <h3>Menu</h3>
     <div class="menu">
-      <router-link to="/" class="button">
+      <router-link to="/home" class="button">
         <span class="material-icons">grid_view</span>
         <span class="text">Dashboard</span>
       </router-link>
@@ -28,14 +28,9 @@
         <span class="material-icons">library_books</span>
         <span class="text">Peminjaman</span>
       </router-link>
-    </div>
-
-    <div class="flex"></div>
-
-    <div class="menu">
-      <router-link to="/settings" class="button">
-        <span class="material-icons">settings</span>
-        <span class="text">Settings</span>
+      <router-link to="/pengembalian" class="button">
+        <span class="material-icons">history</span>
+        <span class="text">Pengembalian</span>
       </router-link>
     </div>
   </aside>
@@ -50,7 +45,7 @@ const is_expanded = ref(localStorage.getItem("is_expanded") === "true");
 const ToggleMenu = () => {
   is_expanded.value = !is_expanded.value;
   localStorage.setItem("is_expanded", is_expanded.value);
-};
+}
 </script>
 
 <style lang="scss" scoped>

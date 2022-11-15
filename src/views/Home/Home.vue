@@ -2,54 +2,48 @@
 	<Sidebar />
 	<div class="container-fluid">
 		<div class="mt-3">
+			<h2>Dashboard</h2><br>
+			<div class="row">
+					<div class="col-xl-4 col-sm-6 mb-3">
+						<div class="card text-white bg-primary o-hidden h-100">
+							<div class="card-body">
+								<div class="mr-5"><h3><span class="material-icons">group</span> Anggota</h3></div>				
+								<div class="mr-5"><h2>10</h2></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 col-sm-6 mb-3">
+						<div class="card text-white bg-warning o-hidden h-100">
+							<div class="card-body">
+								<div class="card-body-icon">
+									<i class="fas fa-notes-medical"></i>
+								</div>
+								<div class="mr-5">Pasien Lama</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 col-sm-6 mb-3">
+						<div class="card text-white bg-success o-hidden h-100">
+							<div class="card-body">
+								<div class="card-body-icon">
+									<i class="fad fa-print"></i>
+								</div>
+								<div class="mr-5">Cetak</div>
+							</div>
+			
+						</div>
+					</div>
+				</div>
 		</div>
+    
 	</div>
 </template>
 
-<script setup> 
-import Sidebar from '../../components/Sidebar.vue'
+<script>
+import axios from "axios";
+import Sidebar from "../../components/Sidebar.vue";
+export default {
+  name: "Home",
+  components: { Sidebar },
+};
 </script>
-
-<style lang="scss">
-:root {
-  --primary: #4ade80;
-  --primary-alt: #22c55e;
-  --grey: #64748b;
-  --dark: #1e293b;
-  --dark-alt: #334155;
-  --light: #f1f5f9;
-  --sidebar-width: 300px;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Fira sans", sans-serif;
-}
-
-body {
-  background: var(--light);
-}
-
-button {
-  cursor: pointer;
-  appearance: none;
-  border: none;
-  outline: none;
-  background: none;
-}
-
-.app {
-  display: flex;
-
-  main {
-    flex: 1 1 0;
-    padding: 2rem;
-
-    @media (max-width: 1024px) {
-      padding-left: 6rem;
-    }
-  }
-}
-</style>

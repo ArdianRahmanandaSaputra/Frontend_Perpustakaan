@@ -2,11 +2,24 @@
   <Sidebar />
   <div class="container-fluid">
     <div class="mt-3">
-      <RouterLink class="nav-link" to="/createanggota"
-        ><a href="" class="btn btn-primary"
-          ><i class="far fa-plus"> Tambah Anggota</i></a
-        ></RouterLink
-      ><br />
+      <div class="row">
+        <div class="col-md-6">
+          <RouterLink class="nav-link" to="/createanggota"
+            ><a href="" class="btn btn-primary"
+              ><i class="far fa-plus"> Tambah Anggota</i></a
+            ></RouterLink
+          >
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex justify-content-end">
+            <a v-on:click="logout()" class="btn btn-secondary"
+              ><i class="far fa-sign-out-alt"> Logout</i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <br />
       <table class="table table-bordered table-striped" id="tabelanggota">
         <thead>
           <tr>
@@ -19,16 +32,30 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(anggota, index) in covid" :key="index">
+          <tr v-for="(anggota, index) in anggota" :key="index">
             <td>{{ anggota.nama }}</td>
             <td>{{ anggota.alamat }}</td>
             <td>{{ anggota.telp }}</td>
             <td>{{ anggota.status }}</td>
             <td>{{ anggota.terdaftar }}</td>
             <td>
-              <a v-on:click="hapus(anggota.id_anggota)" class="btn btn-danger"
-                ><i class="far fa-trash"> Delete</i>
-              </a>
+              <div class="row">
+                <div class="col-md-3">
+                  <a v-on:click="cetak(anggota.id)" class="btn btn-info"
+                    ><i class="far fa-print"></i>
+                  </a>
+                </div>
+                <div class="col-md-3">
+                  <a v-on:click="ubah(anggota.id)" class="btn btn-warning"
+                    ><i class="far fa-edit"></i>
+                  </a>
+                </div>
+                <div class="col-md-3">
+                  <a v-on:click="hapus(anggota.id)" class="btn btn-danger"
+                    ><i class="far fa-trash"></i>
+                  </a>
+                </div>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -39,13 +66,12 @@
     
     <script>
 import axios from "axios";
-
 import Sidebar from "../../components/Sidebar.vue";
 export default {
   name: "User",
   data() {
     return {
-      covid: "",
+      anggota: "",
     };
   },
 
@@ -53,27 +79,38 @@ export default {
     hapus(id) {
       if (confirm("Yakin Untuk Menghapus??")) {
         axios
-        .get(`http://127.0.0.1:8000/api/anggota/${id}`)
-        .then(this.tampilData())
-        .catch((e) => console.log(e));
+          .get(`http://127.0.0.1:8000/api/anggota/${id}`)
+          .then(this.tampilData())
+          .catch((e) => console.log(e));
       }
+    },
+    logout() {
+      if (confirm("Yakin Ingin Keluar??")) {
+        axios.get(`http://127.0.0.1:8000/api/logout`).then((res) => {
+          localStorage.removeItem("loggedin");
+          localStorage.removeItem("token");
+          return this.$router.push("/");
+        });
+      }
+    },
+    ubah(id) {
+      return this.$router.push("/UpdateAnggota/" + id);
+    },
+    cetak(id) {
+      return this.$router.push("/CetakView/" + id);
     },
     tampilData() {
       axios
         .get("http://127.0.0.1:8000/api/anggota")
-        .then((res) => (this.covid = res.data))
+        .then((res) => (this.anggota = res.data))
         .catch((e) => console.log(e));
     },
   },
   mounted() {
-
-    $(document).ready(function(){
-        $('#tabel-data').DataTable();
-    });
-
+    // $("#tabelanggota").DataTable();
     axios
       .get("http://127.0.0.1:8000/api/anggota")
-      .then((res) => (this.covid = res.data))
+      .then((res) => (this.anggota = res.data))
       .catch((e) => console.log(e));
   },
   components: { Sidebar },

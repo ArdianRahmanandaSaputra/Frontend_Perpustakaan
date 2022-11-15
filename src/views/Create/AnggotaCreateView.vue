@@ -3,7 +3,7 @@
   <Sidebar />
   <div class="container-fluid">
     <div class="mt-3">
-      <form @submit.prevent="submitBuku">
+      <form @submit.prevent="submitAnggota">
         <base-input
           type="text"
           v-model.trim="nama"
@@ -22,14 +22,22 @@
           label="No. Telepon"
           placeholder="No. Telepon"
         ></base-input>
-        <base-input
-          type="text"
-          v-model.trim="status"
-          label="Status"
-          placeholder="Status"
-        ></base-input>
-        <br>
-        <button class="btn btn-primary"><i class="far fa-save"> Submit</i></button>
+        <br />
+        <label for="">Status</label>
+        <select
+          name="status"
+          @change="onChange($event)"
+          class="form-select form-control"
+        >
+          <Option value="">---- Pilih Status ----</Option>
+          <option value="Siswa/Mahasiswa">Siswa/Mahasiswa</option>
+          <option value="Guru/Dosen">Guru/Dosen</option>
+          <option value="Lainnya">Lainnya</option>
+        </select>
+        <br />
+        <button class="btn btn-primary">
+          <i class="fal fa-save"> Submit</i>
+        </button>
       </form>
     </div>
   </div>
@@ -47,11 +55,13 @@ export default {
       nama: "",
       alamat: "",
       telp: "",
-      status: "",
+      onChange(e) {
+        this.status = e.target.value;
+      },
     };
   },
   methods: {
-    submitBuku() {
+    submitAnggota() {
       axios
         .post("http://127.0.0.1:8000/api/anggota/", {
           nama: this.nama,

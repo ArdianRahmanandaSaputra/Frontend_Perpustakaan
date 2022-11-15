@@ -41,8 +41,8 @@ export default {
   data() {
     return {
       user: {
-        email: null,
-        password: null,
+        email: "ardian@gmail.com",
+        password: "123",
       },
       loggedin: localStorage.getItem("loggedin"),
     };
@@ -60,7 +60,7 @@ export default {
               localStorage.setItem("loggedin", "true");
               localStorage.setItem("token", res.data.token);
               this.loggedin = true;
-              return this.$router.push("/");
+              return this.$router.push("/Home");
             }
           });
       }

@@ -1,11 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home/Home.vue'
+import Login from '../views/Login.vue'
 const router = createRouter({
 	history: createWebHistory(),
 	routes: [
 		{
 			path: '/',
-			component: Home
+			component: Login
+		},
+		{
+			path: '/Home',
+			component: () => import('../views/Home/Home.vue')
 		},
 		{
 			path: '/Anggota',
@@ -20,20 +24,40 @@ const router = createRouter({
 			component: () => import('../views/Home/Peminjaman.vue')
 		},
 		{
-			path: '/Login',
-			component: () => import('../views/Login.vue')
-		},
-		{
 			path: '/CreateAnggota',
-			component: () => import('../views/Create/AnggotaView.vue')
+			component: () => import('../views/Create/AnggotaCreateView.vue')
 		},
 		{
 			path: '/CreateBuku',
-			component: () => import('../views/Create/BukuView.vue')
+			component: () => import('../views/Create/BukuCreateView.vue')
 		},
 		{
 			path: '/CreatePeminjaman',
-			component: () => import('../views/Create/PeminjamanView.vue')
+			component: () => import('../views/Create/PeminjamanCreateView.vue')
+		},
+		{
+			path: '/UpdateAnggota/:id',
+			component: () => import('../views/Update/AnggotaUpdateView.vue')
+		},
+		{
+			path: '/UpdateBuku/:id',
+			component: () => import('../views/Update/BukuUpdateView.vue')
+		},
+		{
+			path: '/UpdatePeminjaman/:id',
+			component: () => import('../views/Update/PeminjamanUpdateView.vue')
+		},
+		{
+			path: '/FormPengembalian/:id',
+			component: () => import('../views/Create/PengembalianCreateView.vue')
+		},
+		{
+			path: '/Pengembalian',
+			component: () => import('../views/Home/Pengembalian.vue')
+		},
+		{
+			path: '/CetakView/:id',
+			component: () => import('../views/CetakView.vue')
 		},
 	],
 })
