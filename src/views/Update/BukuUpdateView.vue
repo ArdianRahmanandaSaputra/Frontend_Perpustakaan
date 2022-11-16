@@ -11,18 +11,13 @@
           label="Judul Buku"
           placeholder="Judul Buku"
         ></base-input>
-        <label for="">Jenis Buku</label>
-        <select
-          name="jenis_buku"
-          @change="onChange($event)"
-          class="form-select form-control"
-        >
-          <option value="">---- Pilih Status ----</Option>
-          <option value="Ilmu Pengetahuan">Ilmu Pengetahuan</option>
-          <option value="Novel">Novel</option>
-          <option value="Kartun">Kartun</option>
-          <option value="Lainnya">Lainnya</option>
-        </select>
+        <base-input
+          type="text"
+          v-model.trim="jenis_buku"
+          label="Jenis Buku"
+          placeholder="Jenis Buku"
+          readonly
+        ></base-input>
         <base-input
           type="text"
           v-model.trim="pengarang"
@@ -42,7 +37,9 @@
           placeholder="Tahun Terbit"
         ></base-input>
         <br />
-        <button class="btn btn-primary"><i class="far fa-save"> Submit</i></button>
+        <button class="btn btn-primary">
+          <i class="far fa-save"> Submit</i>
+        </button>
       </form>
     </div>
   </div>
@@ -58,21 +55,19 @@ export default {
   data() {
     return {
       judul_buku: "",
-      onChange(e) {
-        this.jenis_buku = e.target.value;
-      },
+      jenis_buku: "",
       pengarang: "",
       penerbit: "",
       thn_terbit: "",
       status: "",
 
-      id:this.$route.params.id
+      id: this.$route.params.id,
     };
   },
   methods: {
     editbuku() {
       axios
-      .put("http://127.0.0.1:8000/api/buku/"+this.id, {
+        .put("http://127.0.0.1:8000/api/buku/" + this.id, {
           judul_buku: this.judul_buku,
           jenis_buku: this.jenis_buku,
           pengarang: this.pengarang,
@@ -85,17 +80,15 @@ export default {
         .catch((response) => console.log(response));
     },
   },
-  mounted(){
-    axios
-    .get ("http://127.0.0.1:8000/api/bukushow/"+this.id)
-    .then(res => {
-      this.judul_buku = res.data.judul_buku
-      this.jenis_buku = res.data.jenis_buku
-      this.pengarang = res.data.pengarang
-      this.penerbit = res.data.penerbit
-      this.thn_terbit = res.data.thn_terbit
-      this.status = res.data.status
-    })
+  mounted() {
+    axios.get("http://127.0.0.1:8000/api/bukushow/" + this.id).then((res) => {
+      this.judul_buku = res.data.judul_buku;
+      this.jenis_buku = res.data.jenis_buku;
+      this.pengarang = res.data.pengarang;
+      this.penerbit = res.data.penerbit;
+      this.thn_terbit = res.data.thn_terbit;
+      this.status = res.data.status;
+    });
   },
 };
 </script>
