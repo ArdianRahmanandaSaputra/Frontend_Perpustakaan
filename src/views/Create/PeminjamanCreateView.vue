@@ -3,6 +3,7 @@
   <Sidebar />
   <div class="container-fluid">
     <div class="mt-3">
+      <h2>Form Peminjaman Buku</h2>
       <form @submit.prevent="submitPinjam">
         <base-input
           type="text"

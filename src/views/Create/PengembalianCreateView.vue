@@ -3,6 +3,7 @@
   <Sidebar />
   <div class="container-fluid">
     <div class="mt-3">
+      <h2>Form Pengembalian Buku</h2>
       <form @submit.prevent="submitkembali">
         <base-input
           type="text"
@@ -25,12 +26,12 @@
           placeholder="ID Anggota"
           readonly
         ></base-input>
-        <base-input type="text" v-model.trim="tanggal_kembali"></base-input>
         <base-input
           type="text"
-          v-model.trim="tanggal_kembali_sebenarnya"
+          v-model.trim="denda"
+          label="Denda"
+          readonly
         ></base-input>
-        <base-input type="text" v-model.trim="denda"></base-input>
         <br />
         <button class="btn btn-primary">
           <i class="far fa-save"> Submit</i>
@@ -86,10 +87,14 @@ export default {
       let telat = new Date(timestamp);
       let saiki = new Date(Date.parse(this.tanggal_kembali));
 
-      const diffTime = Math.abs(telat - saiki);
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      if (this.tanggal_kembali_sebenarnya > this.tanggal_kembali) {
+        const diffTime = Math.abs(telat - saiki);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-      this.denda = diffDays * 10000;
+        this.denda = diffDays * 10000;
+      } else {
+        this.denda = 0;
+      }
     });
 
     var m = new Date();

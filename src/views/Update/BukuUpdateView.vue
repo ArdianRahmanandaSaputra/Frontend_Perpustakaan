@@ -3,6 +3,7 @@
   <Sidebar />
   <div class="container-fluid">
     <div class="mt-3">
+      <h2>Form Update Buku</h2>
       <form @submit.prevent="editbuku">
         <base-input
           type="text"
@@ -19,7 +20,7 @@
           <option value="">---- Pilih Status ----</Option>
           <option value="Ilmu Pengetahuan">Ilmu Pengetahuan</option>
           <option value="Novel">Novel</option>
-          <option value="Fiksi/Kartun">Fiksi/Kartun</option>
+          <option value="Kartun">Kartun</option>
           <option value="Lainnya">Lainnya</option>
         </select>
         <base-input

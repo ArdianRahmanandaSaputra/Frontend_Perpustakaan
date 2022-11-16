@@ -3,6 +3,7 @@
   <Sidebar />
   <div class="container-fluid">
     <div class="mt-3">
+      <h2>Form Input Anggota</h2>
       <form @submit.prevent="submitAnggota">
         <base-input
           type="text"
